@@ -1,73 +1,92 @@
-# React + TypeScript + Vite
+# useContext
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is it?
 
-Currently, two official plugins are available:
+`useContext` is a React Hook that lets you read and subscribe
+to context from your component. It allows sharing data across
+the component tree without passing props manually at every level.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What is it used for?
 
-## React Compiler
+Sharing global data that many components need. Common use cases:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Current authenticated user
+- Theme (dark/light mode)
+- Language or locale settings
+- Any data needed by deeply nested components
 
-## Expanding the ESLint configuration
+## Key Concepts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**createContext(defaultValue)** — Creates the context object.
+The default value is used only when no Provider is found above.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Provider** — Wraps the components that need access to the context.
+Accepts a `value` prop that is shared with all children.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**useContext(MyContext)** — Reads the current context value
+from the nearest Provider above in the tree.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Re-renders** — Every component that calls `useContext`
+re-renders when the context value changes.
+
+## When to use it?
+
+- Data needs to be accessible by many components at different levels
+- You want to avoid prop drilling through intermediate components
+- The data is relatively stable (theme, user, language)
+
+## When NOT to use it?
+
+- Only two nearby components share the data → pass props directly
+- The data changes very frequently → causes too many re-renders
+- The app is large and complex → use Zustand instead
+
+## Is it worth learning?
+
+Yes. `useContext` is built into React with no extra installation.
+It is perfect for simple global state like themes or user info.
+Understanding it also helps you understand how Zustand works internally.
+
+## Alternatives
+
+| Technology | When to choose it |
+|---|---|
+| useContext (this) | Simple global data, stable values |
+| useState + props | Two nearby components |
+| Zustand | Frequently changing global state |
+| MobX | Reactive state with complex relationships |
+
+## useContext vs Zustand
+
+**useContext** is built into React, requires no installation,
+and works well for stable data like themes or user info.
+However, every consumer re-renders when the value changes.
+
+**Zustand** uses selectors so components only re-render
+when the specific piece of state they use changes.
+Better for frequently updated global state.
+
+**Recommendation:** Use `useContext` for simple and stable global data.
+Use Zustand when performance matters or the state changes often.
+
+## What does the example in this branch do?
+
+`src/App.tsx` creates a context with a greeting value.
+The `Mensaje` component reads the greeting directly from
+the context without receiving any props.
+It demonstrates how `useContext` eliminates prop drilling
+by making data available anywhere in the tree.
+
+## How to run
+
+```bash
+git checkout feat/useContext
+cd pweb-react-investigation
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Official Resources
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [useContext Reference](https://react.dev/reference/react/useContext)
+- [Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)

@@ -1,73 +1,111 @@
-# React + TypeScript + Vite
+# pweb-react-investigation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About the project
 
-Currently, two official plugins are available:
+This repository contains a practical investigation of the most
+important tools and libraries in the modern React ecosystem.
+Each topic is isolated in its own branch with a working code example
+and a detailed README explaining the technology.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project was developed as part of the Web Programming course
+at Universidad Central del Ecuador.
 
-## React Compiler
+## Project structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Each branch contains:
+- `src/App.tsx` — A minimal working example of the technology
+- `README.md` — Documentation explaining what it is, when to use it,
+  key concepts, alternatives, and how to run the example
 
-## Expanding the ESLint configuration
+## Branches
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Branch | Technology | Category |
+|---|---|---|
+| [feat/useState](../../tree/feat/useState) | useState | Hooks |
+| [feat/useEffect](../../tree/feat/useEffect) | useEffect | Hooks |
+| [feat/useRef](../../tree/feat/useRef) | useRef | Hooks |
+| [feat/useContext](../../tree/feat/useContext) | useContext | Hooks |
+| [feat/react-router](../../tree/feat/react-router) | React Router | Router |
+| [feat/tanstack-router](../../tree/feat/tanstack-router) | TanStack Router | Router |
+| [feat/react-hook-form](../../tree/feat/react-hook-form) | React Hook Form | Forms |
+| [feat/formik](../../tree/feat/formik) | Formik | Forms |
+| [feat/validation](../../tree/feat/validation) | Validation | Forms |
+| [feat/zod](../../tree/feat/zod) | Zod | Forms |
+| [feat/zustand](../../tree/feat/zustand) | Zustand | State Management |
+| [feat/mobx](../../tree/feat/mobx) | MobX | State Management |
+| [feat/tanstack-query](../../tree/feat/tanstack-query) | TanStack Query | Server State |
+| [feat/tailwindcss](../../tree/feat/tailwindcss) | TailwindCSS | Frameworks UI |
+| [feat/chakra-ui](../../tree/feat/chakra-ui) | Chakra UI | Frameworks UI |
+| [feat/material-ui](../../tree/feat/material-ui) | Material UI | Frameworks UI |
+| [feat/jest](../../tree/feat/jest) | Jest | Testing |
+| [feat/react-testing-library](../../tree/feat/react-testing-library) | React Testing Library | Testing |
+| [feat/cypress](../../tree/feat/cypress) | Cypress | Testing |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## How to run any branch
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# 1. Clone the repository
+git clone https://github.com/TU_USUARIO/pweb-react-investigation.git
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 2. Enter the project folder
+cd pweb-react-investigation
+
+# 3. Switch to the branch you want to run
+git checkout feat/useState
+
+# 4. Install dependencies
+npm install
+
+# 5. Install the branch specific library (check the branch README)
+npm install library-name
+
+# 6. Run the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open your browser at `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Technologies covered
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Hooks
+- useState
+- useEffect
+- useRef
+- useContext
+
+### Router
+- React Router
+- TanStack Router
+
+### Forms
+- React Hook Form
+- Formik
+- Validation
+- Zod
+
+### State Management
+- Zustand
+- MobX
+
+### Server State
+- TanStack Query
+
+### Frameworks UI
+- TailwindCSS
+- Chakra UI
+- Material UI
+
+### Testing
+- Jest
+- React Testing Library
+- Cypress
+
+## Authors
+
+- Jinner Nayeli Guayas Nayeli
+- Washington Adrian Lumbi Sanchez
+- Luis Andres Paspuezán Quelal
+
+**Course:** Web Programming
+**Institution:** Universidad Central del Ecuador
+**Period:** 2026-2026

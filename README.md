@@ -102,7 +102,7 @@ Open your browser at `http://localhost:5173`
 
 ## Authors
 
-- Jinner Nayeli Guayas Nayeli
+- Jinner Nayeli Guayas Pazmiño
 - Washington Adrian Lumbi Sanchez
 - Luis Andres Paspuezán Quelal
 

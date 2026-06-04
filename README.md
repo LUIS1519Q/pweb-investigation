@@ -1,73 +1,111 @@
-# React + TypeScript + Vite
+# TanStack Query
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is it?
 
-Currently, two official plugins are available:
+TanStack Query is often described as the missing data-fetching
+library for web applications. It makes fetching, caching,
+synchronizing, and updating server state in React applications
+straightforward and automatic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What is it used for?
 
-## React Compiler
+Managing server state: data that lives on a remote server
+and needs to be fetched, cached, and kept in sync.
+Common use cases:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fetching data from a REST API
+- Caching API responses to avoid unnecessary requests
+- Automatically refetching stale data
+- Managing loading and error states automatically
 
-## Expanding the ESLint configuration
+## Key Concepts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**QueryClient** — The central cache manager.
+Stores all fetched data and manages cache invalidation.
+Must be created once and provided to the app.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**QueryClientProvider** — Wraps the app and makes the QueryClient
+available to all components. Required for useQuery to work.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**useQuery** — The main hook for fetching data.
+Returns `data`, `isLoading`, `isError`, and more.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**queryKey** — A unique identifier for each query.
+Used as the cache key. If two components use the same key,
+they share the same cached data and only one request is made.
+
+**queryFn** — The function that fetches the data.
+Must return a Promise. TanStack Query calls it automatically.
+
+**enabled** — Optional boolean that controls whether the query runs.
+Useful when the query depends on a value that may not exist yet.
+
+**invalidateQueries** — Forces a query to refetch its data.
+Used after a mutation to keep the UI in sync with the server.
+
+## When to use it?
+
+- Any data that comes from a server or API
+- When you need automatic caching and background refetching
+- When you want loading and error states handled automatically
+
+## When NOT to use it?
+
+- Local UI state like toggles or counters → use useState
+- Global app state like theme or user preferences → use Zustand
+- Very simple one-time fetches in small apps → useEffect may be enough
+
+## Is it worth learning?
+
+Yes. TanStack Query has become the standard solution for server
+state management in React. It eliminates dozens of lines of
+manual useEffect code and handles edge cases automatically.
+It is used in production by thousands of companies worldwide.
+
+## Alternatives
+
+| Technology | When to choose it |
+|---|---|
+| TanStack Query (this) | Server data, caching, automatic refetching |
+| useEffect + fetch | Simple one-time fetches, no caching needed |
+| SWR | Similar to TanStack Query, simpler API |
+| Zustand | Client-side global state, not server data |
+
+## TanStack Query vs useEffect
+
+**useEffect** requires you to manually manage loading state,
+error state, caching, and refetching every time you fetch data.
+This leads to repetitive boilerplate code in every component.
+
+**TanStack Query** handles all of that automatically.
+You only define what data to fetch and it takes care of the rest:
+caching, background updates, error retries, and loading states.
+
+**Recommendation:** Use TanStack Query for any serious data fetching.
+Use useEffect only for simple one-time effects that are not data fetching.
+
+## What does the example in this branch do?
+
+`src/App.tsx` fetches a user from a public API using TanStack Query.
+While the data is loading, it shows a loading message.
+If the request fails, it shows an error message.
+When the data arrives, it displays the user's name.
+It demonstrates how `QueryClient`, `QueryClientProvider`,
+`useQuery`, `queryKey`, and `queryFn` work together
+to fetch and display server data automatically.
+
+## How to run
+
+```bash
+git checkout feat/tanstack-query
+cd pweb-react-investigation
+npm install
+npm install @tanstack/react-query
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Official Resources
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [TanStack Query Documentation](https://tanstack.com/query/latest)
+- [Quick Start](https://tanstack.com/query/latest/docs/framework/react/quick-start)
+- [useQuery Reference](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)

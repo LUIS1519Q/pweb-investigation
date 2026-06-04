@@ -1,73 +1,107 @@
-# React + TypeScript + Vite
+# Chakra UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is it?
 
-Currently, two official plugins are available:
+Chakra UI is a simple, modular, and accessible component library
+for React. It provides a set of ready-made UI components that
+follow WAI-ARIA accessibility guidelines out of the box.
+Every component is designed to be composable and customizable
+using style props directly in JSX.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What is it used for?
 
-## React Compiler
+Building accessible and consistent user interfaces quickly
+without writing CSS from scratch. Common use cases:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Building forms with inputs, labels and error messages
+- Creating layouts with Box, Flex, Grid and Stack
+- Adding modals, toasts and drawers to the app
+- Implementing dark mode with zero extra configuration
 
-## Expanding the ESLint configuration
+## Key Concepts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Provider** — Wraps the entire app and enables Chakra UI.
+Required for all Chakra components to work correctly.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Box** — The most fundamental component. Equivalent to a div
+but accepts all CSS properties as props.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Style props** — CSS properties passed directly as props.
+`bg="white"` sets background. `p={4}` sets padding.
+`color="blue.600"` sets text color.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**HStack / VStack** — Flex containers with automatic spacing.
+HStack arranges children horizontally. VStack vertically.
+
+**colorScheme** — Applies a complete color palette to a component.
+`colorScheme="blue"` sets background, hover, and focus colors automatically.
+
+**Responsive values** — Pass an array to apply different values
+at different breakpoints: `fontSize={{ base: "sm", md: "lg" }}`.
+
+## When to use it?
+
+- You need accessible components without building them from scratch
+- You want a consistent design system with minimal configuration
+- You need complex components like Modal, Toast, or Drawer quickly
+
+## When NOT to use it?
+
+- You need a fully custom design → use TailwindCSS instead
+- The project already uses Material UI
+- Bundle size is critical → Chakra adds significant weight
+
+## Is it worth learning?
+
+Yes. Chakra UI is one of the most popular React component libraries.
+Its accessibility-first approach and simple API make it
+a great choice for building production-ready interfaces quickly.
+It is widely used in startups and medium-sized projects.
+
+## Alternatives
+
+| Technology | When to choose it |
+|---|---|
+| Chakra UI (this) | Accessible components, simple API, startups |
+| TailwindCSS | Custom design, full control, utility-first |
+| Material UI | Material Design, enterprise projects |
+| shadcn/ui | Copy-paste components, full ownership of code |
+
+## Chakra UI vs Material UI
+
+**Chakra UI** has a simpler and more flexible API.
+Style props make customization straightforward.
+Better for projects that need a neutral design system.
+
+**Material UI** implements Google's Material Design strictly.
+More components available out of the box including DataGrid.
+Better for enterprise projects that need a familiar design language.
+
+**Recommendation:** Use Chakra UI for startups and projects
+that need a clean neutral design. Use Material UI for enterprise
+projects or when Material Design is required.
+
+## What does the example in this branch do?
+
+`src/App.tsx` creates a centered card on a gray background
+using Chakra UI components. The card has a title, a description,
+and a button. All styles are applied using Chakra style props
+directly in JSX without any CSS file.
+It demonstrates how `Provider`, `Box`, `Heading`, `Text`,
+and `Button` work together with style props.
+
+## How to run
+
+```bash
+git checkout feat/chakra-ui
+cd pweb-react-investigation
+npm install
+npm install @chakra-ui/react
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Official Resources
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [Chakra UI Documentation](https://chakra-ui.com/docs)
+- [Installation](https://chakra-ui.com/docs/get-started/installation)
+- [Style Props](https://chakra-ui.com/docs/styled-system/style-props)

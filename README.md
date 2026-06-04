@@ -1,73 +1,105 @@
-# React + TypeScript + Vite
+# TailwindCSS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is it?
 
-Currently, two official plugins are available:
+Tailwind CSS is a utility-first CSS framework packed with classes
+like `flex`, `pt-4`, `text-center` and `rotate-90` that can be
+composed to build any design directly in your markup.
+Instead of writing custom CSS, you apply pre-defined utility
+classes directly in your HTML or JSX.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What is it used for?
 
-## React Compiler
+Building custom designs quickly without leaving your component files.
+Common use cases:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Styling layouts with flexbox and grid
+- Building responsive designs with breakpoint prefixes
+- Creating cards, buttons, forms and navbars
+- Applying hover, focus and other interactive states
 
-## Expanding the ESLint configuration
+## Key Concepts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Utility classes** — Single-purpose classes that do one thing.
+`bg-blue-500` sets background color. `p-4` sets padding.
+`text-white` sets text color.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Responsive prefixes** — Classes prefixed with breakpoints
+apply only at that screen size and above.
+`md:grid-cols-3` applies 3 columns only on medium screens and larger.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**State variants** — Classes prefixed with a state apply only
+in that state. `hover:bg-blue-600` changes background on hover.
+`focus:ring-2` adds a ring on focus.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Spacing scale** — Numbers map to consistent spacing values.
+`p-1` = 4px, `p-2` = 8px, `p-4` = 16px, `p-8` = 32px.
+
+**Color scale** — Numbers indicate shade intensity.
+`blue-100` is very light, `blue-500` is medium, `blue-900` is very dark.
+
+## When to use it?
+
+- You want to style components without writing separate CSS files
+- You need a consistent design system with predefined values
+- You want responsive design with minimal effort
+- You prefer keeping styles close to the component markup
+
+## When NOT to use it?
+
+- The project already uses a component library like Chakra UI or MUI
+- The team prefers writing traditional CSS or SCSS
+- You need highly complex animations or custom CSS features
+
+## Is it worth learning?
+
+Yes. Tailwind CSS is the most popular CSS framework today,
+surpassing Bootstrap in adoption. It is used by companies
+like GitHub, Netflix, and NASA. The utility-first approach
+is now a standard pattern in modern frontend development.
+
+## Alternatives
+
+| Technology | When to choose it |
+|---|---|
+| TailwindCSS (this) | Custom design, full control, utility-first |
+| Chakra UI | Ready-made accessible components, faster setup |
+| Material UI | Material Design components, enterprise projects |
+| Bootstrap | Legacy projects, already in use |
+
+## TailwindCSS vs Chakra UI
+
+**TailwindCSS** gives you full control over the design.
+You build everything from scratch using utility classes.
+More flexible but requires more work to build components.
+
+**Chakra UI** gives you ready-made components like Button,
+Input, and Modal out of the box. Less flexible but much
+faster to build a working UI.
+
+**Recommendation:** Use TailwindCSS when you need a custom design.
+Use Chakra UI or Material UI when you need ready-made components quickly.
+
+## What does the example in this branch do?
+
+`src/App.tsx` creates a centered card on a gray background.
+The card has a title, a description, and a button.
+All styles are applied using Tailwind utility classes directly
+in the JSX. It demonstrates how flexbox, spacing, colors,
+shadows, and hover states work with Tailwind classes.
+
+## How to run
+
+```bash
+git checkout feat/tailwindcss
+cd pweb-react-investigation
+npm install
+npm install tailwindcss @tailwindcss/vite
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Official Resources
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+- [Installation with Vite](https://tailwindcss.com/docs/installation/using-vite)
+- [Utility-First Fundamentals](https://tailwindcss.com/docs/utility-first)

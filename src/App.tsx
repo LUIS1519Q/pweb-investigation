@@ -1,42 +1,33 @@
-import {
-  createRouter,
-  createRoute,
-  createRootRoute,
-  RouterProvider,
-  Link,
-  Outlet,
-} from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
 
-const rootRoute = createRootRoute({
-  component: () => (
-    <div>
-      <nav>
-        <Link to="/">Inicio</Link>
-        {" | "}
-        <Link to="/acerca">Acerca</Link>
-      </nav>
-      <Outlet />
-    </div>
-  ),
-});
-
-const inicioRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/",
-  component: () => <h1>Página de Inicio</h1>,
-});
-
-const acercaRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/acerca",
-  component: () => <h1>Página Acerca de</h1>,
-});
-
-const routeTree = rootRoute.addChildren([inicioRoute, acercaRoute]);
-const router = createRouter({ routeTree });
+interface FormData {
+  nombre: string;
+}
 
 function App() {
-  return <RouterProvider router={router} />;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const onSubmit = (data: FormData) => {
+    alert(`Hola ${data.nombre}`);
+  };
+
+  return (
+    <div>
+      <h1>Formulario</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register("nombre", { required: "El nombre es obligatorio" })}
+          placeholder="Escribe tu nombre"
+        />
+        {errors.nombre && <p>{errors.nombre.message}</p>}
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  );
 }
 
 export default App;

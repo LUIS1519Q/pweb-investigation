@@ -1,91 +1,87 @@
-# TanStack Router
+# React Hook Form
 
 ## What is it?
 
-TanStack Router is a fully type-safe routing library for React.
-It connects URLs to components like React Router but with
-complete TypeScript support for routes, params, and search params.
+React Hook Form is a library for managing forms in React.
+It uses refs instead of state to track input values,
+which means fewer re-renders and better performance.
 
 ## What is it used for?
 
-Building multi-page applications where type safety on routes is critical.
+Handling form values, validation, and submission with minimal code.
 Common use cases:
 
-- Navigation between pages with full TypeScript support
-- Dynamic routes with typed parameters
-- Type-safe search params
-- Large scale applications where route errors must be caught at compile time
+- Login and registration forms
+- Multi-field forms with validation
+- Forms that submit data to an API
+- Any form where performance matters
 
 ## Key Concepts
 
-**createRootRoute** — Creates the root route that wraps all other routes.
-This is where the global layout lives, like the navigation bar.
+**useForm** — The main hook. Returns everything needed
+to manage the form: register, handleSubmit, formState.
 
-**createRoute** — Creates an individual route with a path and component.
-Every route must declare its parent route with `getParentRoute`.
+**register** — Connects an input to the form.
+Accepts validation rules like required, minLength, pattern.
 
-**Outlet** — Placeholder inside the root route where child routes render.
-Similar to `{children}` in a layout component.
+**handleSubmit** — Validates all fields before calling onSubmit.
+If validation fails, onSubmit is never called.
 
-**RouterProvider** — Connects the router to React.
-Wraps the entire app and enables the routing system.
+**formState.errors** — Object that holds error messages
+for each field that failed validation.
 
-**Link** — Navigates between pages without reloading the browser.
-Fully typed so TypeScript knows which routes exist.
+**isSubmitting** — Boolean that is true while the form is submitting.
+Useful for disabling the submit button during processing.
 
-**Route.useParams()** — Reads URL params with full type safety.
-TypeScript knows exactly which params each route has.
+**reset** — Clears all form fields back to their initial values.
 
 ## When to use it?
 
-- Full TypeScript type safety on routes is required
-- Large projects where route mistakes must be caught early
-- You want typed search params and navigation
+- Any form with more than one field
+- Forms that need validation before submission
+- Forms that send data to an API
 
 ## When NOT to use it?
 
-- Simple projects where React Router is enough
-- The team is already familiar with React Router
-- Quick setup is more important than type safety
+- A single uncontrolled input with no validation
+- You are already using Formik in an existing project
 
 ## Is it worth learning?
 
-Yes. TanStack Router is growing rapidly in adoption.
-It solves real problems with TypeScript and routing
-that React Router does not address fully.
-Learning it gives you an advantage in modern React projects.
+Yes. React Hook Form is the most popular form library in React today.
+It has replaced Formik in most new projects due to its simplicity
+and performance. It is a must-know for any React developer.
 
 ## Alternatives
 
 | Technology | When to choose it |
 |---|---|
-| TanStack Router (this) | Full type safety, large projects |
-| React Router | Standard routing, simpler setup |
+| React Hook Form (this) | New projects, performance, simplicity |
+| Formik | Legacy projects, already in use |
+| Manual useState | Single input, no validation needed |
 
-## TanStack Router vs React Router
+## React Hook Form vs Formik
 
-**React Router** is simpler to set up and has a much larger community.
-Most tutorials and projects use React Router.
+**React Hook Form** uses refs so the component does not
+re-render on every keystroke. Less code, better performance.
 
-**TanStack Router** requires more configuration but gives you
-complete TypeScript safety. If you mistype a route name or param,
-TypeScript catches it before you run the code.
+**Formik** uses state so the component re-renders on every keystroke.
+More explicit but slower for large forms.
 
-**Recommendation:** Use React Router for most projects.
-Use TanStack Router when type safety on routes is a hard requirement.
+**Recommendation:** Use React Hook Form for all new projects.
+Use Formik only if the project already has it installed.
 
 ## What does the example in this branch do?
 
-`src/App.tsx` creates two pages: Inicio and Acerca using TanStack Router.
-The root route holds the navigation bar and the Outlet.
-Each page is a child route that renders inside the Outlet.
-It demonstrates how `createRootRoute`, `createRoute`,
-`Outlet` and `RouterProvider` work together.
+`src/App.tsx` creates a form with one input field.
+If the user submits without typing a name, an error message appears.
+If the user types a name and submits, an alert shows the name.
+It demonstrates how `register`, `handleSubmit` and `errors` work together.
 
 ## How to run
 
 ```bash
-git checkout feat/tanstack-router
+git checkout feat/react-hook-form
 cd pweb-react-investigation
 npm install
 npm run dev
@@ -93,6 +89,6 @@ npm run dev
 
 ## Official Resources
 
-- [TanStack Router Documentation](https://tanstack.com/router/latest)
-- [Quick Start](https://tanstack.com/router/latest/docs/framework/react/quick-start)
-- [File Based Routing](https://tanstack.com/router/latest/docs/framework/react/routing/file-based-routing)
+- [React Hook Form Documentation](https://react-hook-form.com)
+- [Get Started](https://react-hook-form.com/get-started)
+- [useForm API](https://react-hook-form.com/api/useform)
